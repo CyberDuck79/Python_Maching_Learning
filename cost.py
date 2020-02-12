@@ -1,4 +1,3 @@
-from random import randint
 from random import randrange
 
 
@@ -11,7 +10,7 @@ def f(x, w):
     #y = (x[0] * w[0], x[1] * w[1])
     # or power function ?
     # y = (x[0] ** w[0], x[1] ** w[1])
-    y = w[0] * x[0] + w[1] + x[1]
+    y = w[0] + (w[1] * x)
     return y
 
 # cost computing function
@@ -51,8 +50,8 @@ def set_cost(X, Y, w):
 
 def gradient(x, y, w):
     g = [0, 0]
-    g[0] = -2 * (y - f(x, w)) * x[0]
-    g[1] = -2 * (y - f(x, w)) * x[1]
+    g[0] = -2 * (y - f(x, w))
+    g[1] = -2 * (y - f(x, w)) * x
     return g
 
 
@@ -73,18 +72,4 @@ def learn(X, Y, w, e, n):
         g = gradient(X[k], Y[k], w)
         for j in range(len(w)):
             w[j] = w[j] - e * g[j]
-        e -= (e/n)
-        print(Y[k])
-        print(w)
     return w
-
-
-# Example (6, 10)
-X = ((0, 0), (1, 0), (0, 1), (1, 1), (2, 3), (5, 6), (8, 2), (7, 4), (65, 89), (34, 27), (14, 90), (27, 1), (7, 34))
-Y = (10,     16,     11,     17,     25,     48,     60,     56,     489,      241,      184,      173,     86)
-w = [randint(0, 100), randint(0, 100)]
-e = 0.0001
-n = 100000
-learn(X, Y, w, e, n)
-#print(f((7, 34), (6, 10)))
-
