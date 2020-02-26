@@ -52,8 +52,7 @@ def denormalize_weights(X, Y, w):
 X = []
 Y = []
 with open('data.csv') as file:
-	lines = file.readlines()
-	for line in lines[1:]:
+	for line in file.readlines()[1:]:
 		data = line.split(sep=',')
 		X.append(int(data[0]))
 		Y.append(int(data[1].strip('\n')))
